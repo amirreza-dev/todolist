@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { setStatics } = require('./utils/statics');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 
@@ -13,6 +14,9 @@ app.set('view engine', 'ejs');
 
 //?Static files
 setStatics(app);
+
+//?Routes
+app.use('/admin', adminRoutes);
 
 app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'اپلیکیشن کارهای روزمره' });
