@@ -1,16 +1,17 @@
-const path = require('path');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { setStatics } = require('./utils/statics');
+
 const app = express();
 
+//?Custome middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+//?EJS Engine
+app.set('view engine', 'ejs');
 
-app.listen(3000, () => {
-  console.log('Server is Runing.');
-});
+//?Static files
+setStatics(app);
+
+app.listen(3000, () => console.log(`Server is running`));
