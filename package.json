@@ -1,0 +1,23 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "This is a TodoList app made with ExpressJs",
+  "license": "ISC",
+  "author": "Amirreza Kadkhodazadeh",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "bootstrap-v4-rtl": "^4.6.2-1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "font-awesome": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0"
+  }
+}
