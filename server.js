@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 
 const { setStatics } = require('./utils/statics');
 const adminRoutes = require('./routes/admin');
+const indexRouter = require('./routes/index');
 
 const app = express();
+const port = 3000;
 
 //?Custome middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,10 +18,7 @@ app.set('view engine', 'ejs');
 setStatics(app);
 
 //?Routes
+app.use(indexRouter);
 app.use('/admin', adminRoutes);
 
-app.get('/', (req, res) => {
-  res.render('index', { pageTitle: 'اپلیکیشن کارهای روزمره' });
-});
-
-app.listen(3000, () => console.log(`Server is running`));
+app.listen(port, () => console.log(`Server is running on port ${port}`));
