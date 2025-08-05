@@ -14,7 +14,7 @@ class Todo {
 
   save(callback) {
     fs.readFile(filePath, (err, fileContent) => {
-      // if (err) callback([]);
+      // if (err) return [];
       const todos = JSON.parse(fileContent);
       todos.push(this);
 
@@ -27,7 +27,7 @@ class Todo {
 
   static fetchAll(callback) {
     fs.readFile(filePath, (err, fileContent) => {
-      if (err) callback([]);
+      if (err) return [];
       const todos = JSON.parse(fileContent);
       callback(todos);
     });

@@ -17,9 +17,9 @@
 
       <form
         action="/admin/add-todo"
-        method="POST"
         role="form"
         class="row w-50 justify-content-center mx-auto"
+        method="POST"
       >
         <div class="input-group">
           <input
@@ -30,7 +30,7 @@
           />
 
           <div class="input-group-prepend">
-            <button type="submit" class="btn btn-primary fa fa-plus"></button>
+            <button type="submit" class="btn btn-primary fa fa-plus" />
           </div>
         </div>
       </form>
@@ -46,8 +46,19 @@
         </p>
       </div>
 
-      <% if(todos.lenght > 0) { %>
-      <h1>سلام</h1>
+      <% if(todos.length > 0) { %>
+      <ul class="list-unstyled" id="todo">
+        <% for(let todo of todos) { %>
+        <li>
+          <div class="alert alert-secondary">
+            <%= todo.text %>
+
+            <a href="#" class="fa fa-trash text-danger ml-2 close"></a>
+            <a href="#" class="fa fa-check text-success close"></a>
+          </div>
+        </li>
+        <% } %>
+      </ul>
       <% } else { %>
       <div class="alert alert-warning w-50 mx-auto" role="alert">
         <h4 class="alert-heading">هیچ کاری برای امروز نداری</h4>
