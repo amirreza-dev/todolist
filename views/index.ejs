@@ -30,7 +30,7 @@
           />
 
           <div class="input-group-prepend">
-            <button type="submit" class="btn btn-primary fa fa-plus" />
+            <button type="submit" class="btn btn-primary fa fa-plus"></button>
           </div>
         </div>
       </form>
@@ -50,11 +50,26 @@
       <ul class="list-unstyled" id="todo">
         <% for(let todo of todos) { %>
         <li>
-          <div class="alert alert-secondary">
-            <%= todo.text %>
+          <div
+            class="alert <%= todo.completed ? 'alert-success' : 'alert-secondary' %>"
+          >
+            <% if(todo.completed) { %>
+            <del><%= todo.text %></del>
+            <a
+              href="/admin/delete-todo/<%= todo.id %> "
+              class="fa fa-trash text-danger ml-3 close"
+            ></a>
+            <% } else { %> <%= todo.text %>
 
-            <a href="#" class="fa fa-trash text-danger ml-2 close"></a>
-            <a href="#" class="fa fa-check text-success close"></a>
+            <a
+              href="/admin/delete-todo/<%= todo.id %> "
+              class="fa fa-trash text-danger ml-3 close"
+            ></a>
+            <a
+              href="/admin/completed-todo/<%= todo.id %> "
+              class="fa fa-check-square text-success close"
+            ></a>
+            <% } %>
           </div>
         </li>
         <% } %>
