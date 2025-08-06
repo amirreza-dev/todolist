@@ -1,0 +1,51 @@
+<% if(todos.length > 0) { %>
+<ul class="list-unstyled" id="todo">
+  <% for(let todo of todos) { %>
+  <li>
+    <div
+      class="alert <%= todo.completed ? 'alert-success' : 'alert-secondary' %>"
+    >
+      <% if(todo.completed) { %>
+      <del><%= todo.text %></del>
+      <a
+        href="/admin/delete-todo/<%= todo.id %> "
+        class="fa fa-trash text-danger ml-3 close"
+      ></a>
+      <% } else { %> <%= todo.text %>
+
+      <a
+        href="/admin/delete-todo/<%= todo.id %> "
+        class="fa fa-trash text-danger ml-3 close"
+      ></a>
+      <a
+        href="/admin/completed-todo/<%= todo.id %> "
+        class="fa fa-check-square text-success close"
+      ></a>
+      <% } %>
+    </div>
+  </li>
+  <% } %>
+</ul>
+<% } else { %>
+<div class="alert alert-warning w-50 mx-auto" role="alert">
+  <h4 class="alert-heading">هیچ کاری برای امروز نداری</h4>
+  <p>میتونی کارهای امروزت رو بالا بنویسی تا برات ثبت کنم.</p>
+
+  <hr />
+
+  <p>
+    این نخستین اپلیکیشن من هستش که در دنیای بک اند و با Express Js ساخته شده
+    <span class="fa fa-heart text-danger" />
+  </p>
+  <p class="mb-0">
+    <a
+      href="http://amirreza.dev/"
+      class="text-secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      امیررضا کدخدازاده
+    </a>
+  </p>
+</div>
+<% } %>
