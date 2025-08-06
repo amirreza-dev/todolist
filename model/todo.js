@@ -1,9 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const rootDir = require('../utils/path');
-
-const filePath = path.join(rootDir, 'data', 'todos.json');
+const todoUtils = require('../utils/todos');
 
 class Todo {
   constructor(id, text, completed = false) {
@@ -13,47 +8,41 @@ class Todo {
   }
 
   save(callback) {
-    fs.readFile(filePath, (err, fileContent) => {
-      // if (err) return [];
-      const todos = JSON.parse(fileContent);
+    todoUtils.getTodos((todos) => {
       todos.push(this);
 
-      fs.writeFile(filePath, JSON.stringify(todos), (err) => {
-        if (err) callback(err);
-        else return callback([]);
-      });
-    });
-  }
-
-  static fetchAll(callback) {
-    fs.readFile(filePath, (err, fileContent) => {
-      if (err) return [];
-      const todos = JSON.parse(fileContent);
-      callback(todos);
-    });
-  }
-
-  static deleteTodo(id, callback) {
-    fs.readFile(filePath, (err, fileContent) => {
-      const todos = JSON.parse(fileContent);
-      const filterTodo = todos.filter((todo) => todo.id != id);
-
-      fs.writeFile(filePath, JSON.stringify(filterTodo), (err) => {
+      todoUtils.saveTodos(todos, (err) => {
         callback(err);
       });
     });
   }
 
+  static fetchAll(callback) {
+    todoUtils.getTodos((todos) => {
+      callback(todos);
+    });
+  }
+
+  static deleteTodo(id, callback) {
+    todoUtils.getTodos((todos) => {
+      todoUtils.saveTodos(
+        todos.filter((todo) => todo.id != id),
+        (err) => {
+          callback(err);
+        }
+      );
+    });
+  }
+
   static completedTodo(id, callback) {
-    fs.readFile(filePath, (err, fileContent) => {
-      const todos = JSON.parse(fileContent);
+    todoUtils.getTodos((todos) => {
       const indexTodo = todos.findIndex((todo) => todo.id == id);
 
       const todo = todos[indexTodo];
       todo.completed = true;
       todos[indexTodo] = todo;
 
-      fs.writeFile(filePath, JSON.stringify(todos), (err) => {
+      todoUtils.saveTodos(todos, (err) => {
         callback(err);
       });
     });
