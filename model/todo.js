@@ -1,4 +1,4 @@
-const todoUtils = require('../utils/todos');
+const { getTodos, saveTodos } = require('../utils/todos');
 
 class Todo {
   constructor(id, text, completed = false) {
@@ -8,24 +8,24 @@ class Todo {
   }
 
   save(callback) {
-    todoUtils.getTodos((todos) => {
+    getTodos((todos) => {
       todos.push(this);
 
-      todoUtils.saveTodos(todos, (err) => {
+      saveTodos(todos, (err) => {
         callback(err);
       });
     });
   }
 
   static fetchAll(callback) {
-    todoUtils.getTodos((todos) => {
+    getTodos((todos) => {
       callback(todos);
     });
   }
 
   static deleteTodo(id, callback) {
-    todoUtils.getTodos((todos) => {
-      todoUtils.saveTodos(
+    getTodos((todos) => {
+      saveTodos(
         todos.filter((todo) => todo.id != id),
         (err) => {
           callback(err);
@@ -35,14 +35,14 @@ class Todo {
   }
 
   static completedTodo(id, callback) {
-    todoUtils.getTodos((todos) => {
+    getTodos((todos) => {
       const indexTodo = todos.findIndex((todo) => todo.id == id);
 
       const todo = todos[indexTodo];
       todo.completed = true;
       todos[indexTodo] = todo;
 
-      todoUtils.saveTodos(todos, (err) => {
+      saveTodos(todos, (err) => {
         callback(err);
       });
     });

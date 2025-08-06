@@ -18,3 +18,15 @@ exports.saveTodos = (todos, callback) => {
 };
 
 exports.generateId = Math.floor(Math.random() * 1000);
+
+exports.getDoneTodos = (callback) => {
+  this.getTodos((todos) => {
+    callback(todos.filter((t) => t.completed === true).length);
+  });
+};
+
+exports.getReminingTodos = (callback) => {
+  this.getTodos((todos) => {
+    callback(todos.filter((t) => t.completed !== true).length);
+  });
+};
