@@ -1,4 +1,4 @@
-# todolist
+# TODO List App
 
 This is a [Express.js](https://expressjs.com) project which is my first project in Express.js world. It's a simple TODO list app and bootstraped with [Bootstrap v4](https://getbootstrap.com) and use [EJS](https://ejs.co) as the template engine.
 
